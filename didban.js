@@ -90,17 +90,17 @@ function getCookie(name) {
     return "";
 }
 
-//function setCookie(key, value);
-//{
-  //  if (!value) {
-     //   document.cookie = "{0}=;.format(key);
-       // return;
-    //}
+function setCookie(key, value);
+{
+    if (!value) {
+        document.cookie = "{0}=;.format(key);
+        return;
+    }
 
-    //var dt = new Date();
-    //dt.setMinutes(dt.getMinutes() + timeout);
-    //document.cookie = "{0}={1}; expires=".format(key, value, dt.toUTCString());
-//}
+    var dt = new Date();
+    dt.setMinutes(dt.getMinutes() + timeout);
+    document.cookie = "{0}={1}; expires=".format(key, value, dt.toUTCString());
+}
 
 function create_UUID() {
     var dt = new Date().getTime();
