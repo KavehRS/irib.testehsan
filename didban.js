@@ -22,22 +22,15 @@ var ACTIVITY = {Play: 1, Pause: 2, FDStart: 3, FDEnd: 4, BDStart: 5, BDEnd: 6, C
 var SERVICE_TYPE = {Live: 1, TimeShift: 2, CatchUp: 3, OnDemand: 4,};
 var CONTENT_TYPE = {Video: 1, Audio: 2, Image: 3, Text: 4,};
 
-function getUserIP(onNewIP) {
-    var myPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection;
-    var pc = new myPeerConnection({
-            iceServers: []
-        }),
-        noop = function () {
-        },
-        localIPs = {},
-        ipRegex = /([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/g,
-        key;
-    ipFound = false;
+function getUserIP(url) {
+  return fetch(url).then(res => res.text());
+}
 
-    function iterateIP(ip) {
-        if (!localIPs[ip] && ip != '0.0.0.0') onNewIP(ip);
-        ipFound = true;
-    }
+getUserIP('https://www.cloudflare.com/cdn-cgi/trace').then(data => {
+  let ipRegex = /[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}/
+  let ip = data.match(ipRegex)[0];
+  console.log(ip);
+});
 
 
     pc.createDataChannel("");
